@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+    container_name: jamty-frontend
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/jamty-frontend
+    ports:
+      - '4000:3000'
