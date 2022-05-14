@@ -8,6 +8,7 @@ import ProTip from '../src/ProTip'
 import Copyright from '../src/Copyright'
 
 import { signIn, signOut, useSession } from 'next-auth/react'
+import JamsList from '../components/JamsList'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -53,6 +54,10 @@ const Home: NextPage = () => {
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}
+      <div>
+        <h1>JAMS</h1>
+        <JamsList />
+      </div>
     </Container>
   )
 }
