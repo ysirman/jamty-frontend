@@ -17,7 +17,14 @@ const JamsList: NextPage<JamsListProps> = () => {
   return (
     <ul>
       {jams.map((jam, index) => {
-        return <li key={index}>{jam.place}</li>
+        return (
+          <li key={index}>
+            {jam.place}{' '}
+            <Link href={`/jams/${jam.id}`}>
+              <a>[Detail]</a>
+            </Link>
+          </li>
+        )
       })}
     </ul>
   )
