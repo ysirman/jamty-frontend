@@ -49,7 +49,7 @@ const Home: NextPage = () => {
         <>
           Signed in as <img src={session.user.image ?? ''} width="50px" />
           {session.user.name} <br />
-          JWT : {session.jwt} <br />
+          AccessToken : {session.accessToken} <br />
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}

@@ -1,8 +1,6 @@
 import NextAuth from 'next-auth'
 import TwitterProvider from 'next-auth/providers/twitter'
 import axios from 'axios'
-import { JWT } from 'next-auth/jwt'
-import * as jose from 'jose'
 
 export default NextAuth({
   providers: [
@@ -13,23 +11,6 @@ export default NextAuth({
   ],
   session: {
     maxAge: 15 * (24 * 60 * 60), // 15日（バックエンドのJWTと同じ期限にしておく）
-  },
-  jwt: {
-    // バックエンド側から取得したJWTをそのまま使う為、encode/decodeを上書きする
-    async encode(params: {
-      token: JWT
-      secret: string
-      maxAge: number
-    }): Promise<string> {
-      return params.token.jwt
-    },
-    async decode(params: {
-      token: string
-      secret: string
-    }): Promise<JWT | null> {
-      const payload = await jose.decodeJwt(params.token) // node_modules/next-auth/jwt/index.js で使っている jose.jwtDecrypt はJWEを前提としている為、エラーが発生する。その為、decodeJwtを使用する。
-      return { ...payload, jwt: params.token }
-    },
   },
   callbacks: {
     async signIn({ user, _account, profile }) {
@@ -71,13 +52,7 @@ export default NextAuth({
       return token
     },
     async session({ session, token, user }) {
-      session.jwt = token.jwt
-      session.user.image = token.image
-      session.user.id = token.id
-      session.user.name = token.name
-      session.user.nickname = token.nickname
-      session.user.description = token.description
-      session.user.location = token.location
+      session.accessToken = token.jwt
       return session
     },
   },
