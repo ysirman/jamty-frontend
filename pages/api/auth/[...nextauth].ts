@@ -43,7 +43,10 @@ export default NextAuth({
         .catch(function (error) {
           console.log(error)
         })
-      return true
+      if (user.jwt) {
+        return true
+      }
+      return false
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
