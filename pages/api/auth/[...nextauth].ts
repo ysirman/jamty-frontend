@@ -58,4 +58,18 @@ export default NextAuth({
       return session
     },
   },
+  events: {
+    async signOut(message) {
+      // フロントエンドでログアウトしたらバックエンドからもログアウトする
+      await axios.delete(
+        `${process.env.BACKEND_URL}/v1/auth/sign_out?api_key=${process.env.BACKEND_API_KEY}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${message.token.jwt}`,
+          },
+        }
+      )
+    },
+  },
 })
