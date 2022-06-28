@@ -7,7 +7,12 @@ import Link from '../src/Link'
 import ProTip from '../src/ProTip'
 import Copyright from '../src/Copyright'
 
+import { signIn, signOut, useSession } from 'next-auth/react'
+
 const Home: NextPage = () => {
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
+
   return (
     <Container maxWidth="lg">
       <Box
@@ -28,6 +33,26 @@ const Home: NextPage = () => {
         <ProTip />
         <Copyright />
       </Box>
+      {!session && (
+        <>
+          {loading ? (
+            <>Loading ...</>
+          ) : (
+            <>
+              Not signed in <br />
+              <button onClick={() => signIn()}>Sign in</button>
+            </>
+          )}
+        </>
+      )}
+      {session && (
+        <>
+          Signed in as <img src={session.user.image ?? ''} width="50px" />
+          {session.user.name} <br />
+          AccessToken : {session.accessToken} <br />
+          <button onClick={() => signOut()}>Sign out</button>
+        </>
+      )}
     </Container>
   )
 }
