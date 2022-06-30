@@ -8,6 +8,7 @@ import theme from '../src/theme'
 import createEmotionCache from '../src/createEmotionCache'
 
 import { SessionProvider } from 'next-auth/react'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -15,6 +16,12 @@ const clientSideEmotionCache = createEmotionCache()
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
+
+const cache = new InMemoryCache()
+const client = new ApolloClient({
+  uri: `${process.env.NEXT_PUBLIC_BACKEND_URL}/graphql`,
+  cache,
+})
 
 export default function MyApp(props: MyAppProps) {
   const {
@@ -31,7 +38,9 @@ export default function MyApp(props: MyAppProps) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <ApolloProvider client={client}>
+            <Component {...pageProps} />
+          </ApolloProvider>
         </ThemeProvider>
       </CacheProvider>
     </SessionProvider>
