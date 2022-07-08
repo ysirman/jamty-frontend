@@ -8,3 +8,12 @@ export interface Jam {
   createdAt: string
   updatedAt: string
 }
+
+export interface JamInputType {
+  params: {
+    prefectureId?: number
+    description?: string
+    place?: string
+    scheduledFor?: string
+  }
+}

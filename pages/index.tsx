@@ -56,6 +56,9 @@ const Home: NextPage = () => {
       )}
       <div>
         <h1>JAMS</h1>
+        <Link href={`/jams/new`}>
+          <button>New</button>
+        </Link>
         <JamsList />
       </div>
     </Container>

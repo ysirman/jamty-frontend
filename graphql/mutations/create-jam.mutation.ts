@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 import { Jam } from '../../types'
 
-export const UPDATE_JAM = gql`
-  mutation ($id: ID!, $params: JamInput!) {
-    updateJam(input: { id: $id, params: $params }) {
+export const CREATE_JAM = gql`
+  mutation ($params: JamInput!) {
+    createJam(input: { params: $params }) {
       jam {
         id
         scheduledFor
@@ -18,8 +18,8 @@ export const UPDATE_JAM = gql`
   }
 `
 
-export interface UpdateJamData {
-  updateJam: {
+export interface CreateJamData {
+  createJam: {
     jam: Jam
   }
 }

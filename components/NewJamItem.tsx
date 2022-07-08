@@ -1,33 +1,22 @@
-import { useQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import {
-  UPDATE_JAM,
-  UpdateJamData,
-} from '../graphql/mutations/update-jam.mutation'
-import { JamData, JAM_QUERY } from '../graphql/queries/jam.query'
+  CREATE_JAM,
+  CreateJamData,
+} from '../graphql/mutations/create-jam.mutation'
 import { Jam, JamInputType } from '../types'
 
-interface EditJamItemProps {
-  id: string
-}
-
-const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
+const NewJamItem: NextPage = () => {
+  const router = useRouter()
   const [jam, setJam] = useState<Jam>(null)
   const [message, setMessage] = useState<string>('')
 
-  const [updateJam, mutationResult] = useMutation<UpdateJamData, JamInputType>(
-    UPDATE_JAM
+  const [createJam, mutationResult] = useMutation<CreateJamData, JamInputType>(
+    CREATE_JAM
   )
   const mutationError = mutationResult.error
-  const { loading, error, data } = useQuery<JamData>(JAM_QUERY, {
-    variables: { id: parseInt(id) },
-  })
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {JSON.stringify(error)}</p>
-  if (!jam) setJam(data.jam)
-  if (!jam) return null
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -41,9 +30,8 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
   }
 
   const handleSave = async () => {
-    await updateJam({
+    const { data } = await createJam({
       variables: {
-        id: parseInt(jam.id),
         params: {
           prefectureId: parseInt(jam.prefectureId),
           place: jam.place,
@@ -54,7 +42,7 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
 
     mutationError
       ? alert(`Error: ${JSON.stringify(mutationError)}`)
-      : setMessage('Successfully saved')
+      : router.replace(`/jams/${data?.createJam?.jam?.id}`)
   }
 
   return (
@@ -64,19 +52,19 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
         {message ? <span className="message">{message}</span> : null}
       </div>
       <span className="form-field">
-        <input name="place" value={jam.place} onChange={handleChange} />
+        <input name="place" value={jam?.place} onChange={handleChange} />
       </span>
       <span className="form-field">
         <input
           name="prefectureId"
-          value={jam.prefectureId}
+          value={jam?.prefectureId}
           onChange={handleChange}
         />
       </span>
       <span className="form-field">
         <textarea
           name="description"
-          value={jam.description}
+          value={jam?.description}
           rows={10}
           onChange={handleChange}
         />
@@ -106,4 +94,4 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
   )
 }
 
-export default EditJamItem
+export default NewJamItem
