@@ -9,6 +9,9 @@ interface JamPageProps {
 const JamPage: NextPage<JamPageProps> = ({ id }) => (
   <div>
     <h1>JAM</h1>
+    <Link href={`/jams/${id}/edit`}>
+      <button>Edit</button>
+    </Link>
     <JamItem id={id} />
     <hr />
     <Link href="/">
