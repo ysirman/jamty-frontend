@@ -54,6 +54,13 @@ const Home: NextPage = () => {
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}
+
+      <div>
+        <h1>
+          <Link href={`/users`}>USERS</Link>
+        </h1>
+      </div>
+
       <div>
         <h1>JAMS</h1>
         <Link href={`/jams/new`}>

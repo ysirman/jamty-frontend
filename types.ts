@@ -17,3 +17,14 @@ export interface JamInputType {
     scheduledFor?: string
   }
 }
+
+export interface User {
+  id: string
+  name: string
+  nickname: string
+  image: string
+  description: string
+  location: string
+  createdAt: string
+  updatedAt: string
+}
