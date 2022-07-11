@@ -37,23 +37,26 @@ export default NextAuth({
           }
         )
         .then(function (response) {
+          user.id = response.data.id
           user.jwt = response.headers['authorization'].split(' ')[1] // "Bearer xxxxx" => "xxxxx"を抽出
         })
         .catch(function (error) {
           console.log(error)
         })
-      if (user.jwt) {
+      if (user.id && user.jwt) {
         return true
       }
       return false
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
+        token.userId = user.id
         token.jwt = user.jwt
       }
       return token
     },
     async session({ session, token, user }) {
+      session.userId = token.userId
       session.accessToken = token.jwt
       return session
     },

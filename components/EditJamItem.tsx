@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client'
 import { NextPage } from 'next'
 import { useState } from 'react'
+import WithSession from '@/WithSession'
 import {
   UPDATE_JAM,
   UpdateJamData,
@@ -59,14 +60,14 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
   }
 
   return (
-    <div>
+    <WithSession userId={parseInt(jam.userId)}>
       <JamForm
         jam={jam}
         message={message}
         handleSave={handleSave}
         handleChange={handleChange}
       />
-    </div>
+    </WithSession>
   )
 }
 
