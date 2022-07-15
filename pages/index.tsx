@@ -56,6 +56,12 @@ const Home: NextPage = () => {
         </>
       )}
 
+      <WithSession>
+        <h1>
+          <Link href={`/mypage`}>MyPage</Link>
+        </h1>
+      </WithSession>
+
       <div>
         <h1>
           <Link href={`/users`}>USERS</Link>
