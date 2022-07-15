@@ -30,3 +30,9 @@ export interface User {
   createdAt: string
   updatedAt: string
 }
+
+export interface UserInputType {
+  nickname: string
+  description: string
+  location: string
+}

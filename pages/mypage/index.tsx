@@ -18,6 +18,9 @@ const MyPage: NextPage = () => {
   return (
     <div>
       <h1>MyPage</h1>
+      <Link href={`/mypage/account/edit`}>
+        <button>プロフィール編集</button>
+      </Link>
       <UserItem id={session.userId} />
       <hr />
       <Link href={`/`}>
