@@ -9,6 +9,7 @@ import Copyright from '../src/Copyright'
 
 import { signIn, signOut, useSession } from 'next-auth/react'
 import JamsList from '../components/JamsList'
+import WithSession from '@/WithSession'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -54,11 +55,26 @@ const Home: NextPage = () => {
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}
+
+      <WithSession>
+        <h1>
+          <Link href={`/mypage`}>MyPage</Link>
+        </h1>
+      </WithSession>
+
+      <div>
+        <h1>
+          <Link href={`/users`}>USERS</Link>
+        </h1>
+      </div>
+
       <div>
         <h1>JAMS</h1>
-        <Link href={`/jams/new`}>
-          <button>New</button>
-        </Link>
+        <WithSession>
+          <Link href={`/jams/new`}>
+            <button>New</button>
+          </Link>
+        </WithSession>
         <JamsList />
       </div>
     </Container>

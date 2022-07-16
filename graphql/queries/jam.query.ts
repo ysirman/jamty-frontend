@@ -5,6 +5,7 @@ export const JAM_QUERY = gql`
   query ($id: ID!) {
     jam(id: $id) {
       id
+      userId
       scheduledFor
       prefectureId
       place
