@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { NextPage } from 'next'
-import { useSession } from 'next-auth/react'
+import { Session } from 'next-auth'
 import { useState } from 'react'
 import { Jam } from 'types'
 import {
@@ -10,17 +10,17 @@ import {
 
 interface EntryButtonProps {
   jam: Jam
+  session: Session // WithSessionから受け取る
 }
 
-const EntryButton: NextPage<EntryButtonProps> = ({ jam }) => {
+const EntryButton: NextPage<EntryButtonProps> = ({ jam, session }) => {
   const [message, setMessage] = useState<string>('')
   const [entryJam, entryResult] = useMutation<EntryJamData>(ENTRY_JAM)
   const entryError = entryResult.error
 
-  const { data: session, status } = useSession()
-  const loading = status === 'loading'
-  if (loading || !session) return null
   if (session.userId == jam.userId) return null
+  if (jam.candidates?.some((c) => parseInt(c.id) === session.userId))
+    return null
 
   const handleEntry = async () => {
     await entryJam({ variables: { jamId: parseInt(jam.id) } })
