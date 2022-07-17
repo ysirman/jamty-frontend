@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { Entry } from '../../types'
+import { Jam } from '../../types'
 
 export const ENTRY_JAM = gql`
   mutation ($jamId: ID!) {
@@ -31,6 +31,6 @@ export const ENTRY_JAM = gql`
 
 export interface EntryJamData {
   entryJam: {
-    entry: Entry
+    jam: Jam
   }
 }

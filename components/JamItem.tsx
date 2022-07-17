@@ -13,6 +13,7 @@ import {
 import WithSession from '@/WithSession'
 import EntryButton from '@/EntryButton'
 import Link from 'next/link'
+import CandidatesList from '@/CandidatesList'
 
 interface JamItemProps {
   id: string
@@ -75,6 +76,8 @@ const JamItem: NextPage<JamItemProps> = ({ id }) => {
         <li>{jam.createdAt}</li>
         <li>{jam.updatedAt}</li>
       </ul>
+      <h2>参加希望者</h2>
+      <CandidatesList candidates={jam.candidates} />
     </>
   )
 }

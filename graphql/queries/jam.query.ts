@@ -13,6 +13,16 @@ export const JAM_QUERY = gql`
       canceledAt
       createdAt
       updatedAt
+      candidates {
+        id
+        name
+        nickname
+        image
+        description
+        location
+        createdAt
+        updatedAt
+      }
     }
   }
 `

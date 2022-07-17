@@ -37,11 +37,3 @@ export interface UserInputType {
   description: string
   location: string
 }
-
-export interface Entry {
-  id: string
-  jamId: string
-  userId: string
-  createdAt: string
-  updatedAt: string
-}
