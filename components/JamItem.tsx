@@ -11,6 +11,7 @@ import {
   UncancelJamData,
 } from '../graphql/mutations/uncancel-jam.mutation'
 import WithSession from '@/WithSession'
+import EntryButton from '@/EntryButton'
 import Link from 'next/link'
 
 interface JamItemProps {
@@ -60,6 +61,9 @@ const JamItem: NextPage<JamItemProps> = ({ id }) => {
         </Link>
         <button onClick={cancelButtonHundler}>{cancelButtonLabel}</button>
         {message ? <span className="message">{message}</span> : null}
+      </WithSession>
+      <WithSession>
+        <EntryButton jam={jam} />
       </WithSession>
       <ul>
         <li>{jam.id}</li>
