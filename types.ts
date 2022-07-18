@@ -8,6 +8,7 @@ export interface Jam {
   canceledAt: string
   createdAt: string
   updatedAt: string
+  candidates?: [User]
 }
 
 export interface JamInputType {

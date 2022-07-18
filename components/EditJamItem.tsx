@@ -60,7 +60,7 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
   }
 
   return (
-    <WithSession userId={parseInt(jam.userId)}>
+    <WithSession userId={parseInt(jam.userId)} isOwner={true}>
       <JamForm
         jam={jam}
         message={message}
