@@ -24,14 +24,14 @@ const JamItem: NextPage<JamItemProps> = ({ id }) => {
 
   return (
     <>
-      <WithSession userId={jam.userId}>
+      <WithSession userId={jam.userId} isOwner={true}>
         <Link href={`/jams/${id}/edit`}>
           <button>Edit</button>
         </Link>
         <CancelJamButton jam={jam} />
         <UncancelJamButton jam={jam} />
       </WithSession>
-      <WithSession>
+      <WithSession userId={jam.userId} isOwner={false}>
         <EntryButton jam={jam} />
         <CancelEntryButton jam={jam} />
       </WithSession>

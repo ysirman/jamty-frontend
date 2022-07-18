@@ -17,17 +17,15 @@ const EntryButton: NextPage<EntryButtonProps> = ({ jam, session }) => {
   const [message, setMessage] = useState<string>('')
   const [entryJam, entryResult] = useMutation<EntryJamData>(ENTRY_JAM)
   const entryError = entryResult.error
-
-  if (session.userId == jam.userId) return null
-  if (jam.candidates?.some((c) => parseInt(c.id) === session.userId))
-    return null
-
   const handleEntry = async () => {
     await entryJam({ variables: { jamId: parseInt(jam.id) } })
     entryError
       ? alert(`Error: ${JSON.stringify(entryError)}`)
       : setMessage('Successfully Entry Jam')
   }
+
+  if (jam.candidates?.some((c) => parseInt(c.id) === session.userId))
+    return null
 
   return (
     <>

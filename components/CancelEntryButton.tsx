@@ -21,18 +21,15 @@ const CancelEntryButton: NextPage<CancelEntryButtonProps> = ({
   const [cancelEntry, mutationResult] =
     useMutation<CancelEntryData>(CANCEL_ENTRY)
   const error = mutationResult.error
-
-  if (session.userId == jam.userId) return null
-  if (!jam.candidates?.some((c) => parseInt(c.id) === session.userId))
-    return null
-
   const handleEntry = async () => {
     await cancelEntry({ variables: { jamId: parseInt(jam.id) } })
-
     error
       ? alert(`Error: ${JSON.stringify(error)}`)
       : setMessage('Successfully Cancel Entry')
   }
+
+  if (!jam.candidates?.some((c) => parseInt(c.id) === session.userId))
+    return null
 
   return (
     <>
