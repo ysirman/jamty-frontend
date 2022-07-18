@@ -69,7 +69,9 @@ const Home: NextPage = () => {
       </div>
 
       <div>
-        <h1>JAMS</h1>
+        <h1>
+          <Link href={`/jams`}>JAMS</Link>
+        </h1>
         <WithSession>
           <Link href={`/jams/new`}>
             <button>New</button>
