@@ -12,6 +12,7 @@ import {
 } from '../graphql/mutations/uncancel-jam.mutation'
 import WithSession from '@/WithSession'
 import EntryButton from '@/EntryButton'
+import CancelEntryButton from '@/CancelEntryButton'
 import Link from 'next/link'
 import CandidatesList from '@/CandidatesList'
 
@@ -65,6 +66,7 @@ const JamItem: NextPage<JamItemProps> = ({ id }) => {
       </WithSession>
       <WithSession>
         <EntryButton jam={jam} />
+        <CancelEntryButton jam={jam} />
       </WithSession>
       <ul>
         <li>{jam.id}</li>
