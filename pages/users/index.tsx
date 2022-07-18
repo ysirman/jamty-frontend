@@ -5,7 +5,7 @@ import Container from '@mui/material/Container'
 
 import UsersList from '../../components/UsersList'
 
-const Home: NextPage = () => {
+const UsersListPage: NextPage = () => {
   return (
     <Container maxWidth="lg">
       <div>
@@ -19,4 +19,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default UsersListPage
