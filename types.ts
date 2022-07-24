@@ -1,3 +1,10 @@
+export interface PageInfo {
+  endCursor: string | null
+  startCursor: string | null
+  hasPreviousPage: boolean
+  hasNextPage: boolean
+}
+
 export interface Jam {
   id: string
   userId: string
@@ -9,6 +16,11 @@ export interface Jam {
   createdAt: string
   updatedAt: string
   candidates?: [User]
+}
+
+export interface JamsConnection {
+  pageInfo: PageInfo
+  edges: { node: Jam }[]
 }
 
 export interface JamInputType {
