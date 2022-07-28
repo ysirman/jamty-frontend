@@ -79,6 +79,18 @@ const Home: NextPage = () => {
         </WithSession>
         <JamsList />
       </div>
+      <div>
+        <h2>
+          <Link href="/privacy_policy">プライバシーポリシー</Link>
+        </h2>
+      </div>
+      <div>
+        <h2>
+          <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdWyBBSleTn1-1bHWSlpWSW1MxA9d-WbhjgdR9zoOuXVCdp4Q/viewform">
+            お問い合わせ
+          </Link>
+        </h2>
+      </div>
     </Container>
   )
 }
