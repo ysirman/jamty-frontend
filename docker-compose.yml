@@ -11,10 +11,3 @@ services:
       - .:/jamty-frontend
     ports:
       - '4000:3000'
-    networks:
-      - default
-      - jamty-share-network
-
-networks:
-  jamty-share-network:
-    external: true
