@@ -12,7 +12,12 @@ const JamsListWithPaginate: NextPage = () => {
   const first = 20
   const [after, setAfter] = useState('')
   const [jams, setJams] = useState<{ node: Jam }[] | never[]>([])
-  const [pageInfo, setPageInfo] = useState<PageInfo | never[]>([])
+  const [pageInfo, setPageInfo] = useState<PageInfo>({
+    endCursor: null,
+    startCursor: null,
+    hasPreviousPage: false,
+    hasNextPage: false,
+  })
   const { loading, error, data, fetchMore } = useQuery<JamsConnectionData>(
     JAMS_CONNECTION_QUERY,
     {
@@ -36,7 +41,7 @@ const JamsListWithPaginate: NextPage = () => {
         after: after,
       },
     })
-    if (!pageInfo.endCursor) return
+    if (!pageInfo?.endCursor) return
     setAfter(pageInfo.endCursor)
   }
 

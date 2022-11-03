@@ -21,6 +21,7 @@ const MyPage: NextPage = () => {
       <Link href={`/mypage/account/edit`}>
         <button>プロフィール編集</button>
       </Link>
+      {/* @ts-ignore */}
       <UserItem id={session.userId} />
       <hr />
       <Link href={`/`}>

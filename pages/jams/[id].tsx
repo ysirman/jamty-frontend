@@ -19,6 +19,7 @@ const JamPage: NextPage<JamPageProps> = ({ id }) => (
 
 JamPage.getInitialProps = (ctx: NextPageContext) => {
   const { id } = ctx.query
+  // @ts-ignore
   return { id: typeof id === 'string' ? id : id[0] }
 }
 

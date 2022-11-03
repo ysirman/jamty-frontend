@@ -11,7 +11,17 @@ import JamForm from './JamForm'
 
 const NewJamItem: NextPage = () => {
   const router = useRouter()
-  const [jam, setJam] = useState<Jam>(null)
+  const [jam, setJam] = useState<Jam>({
+    id: '',
+    userId: '',
+    place: '',
+    prefectureId: '',
+    description: '',
+    scheduledFor: '',
+    canceledAt: '',
+    createdAt: '',
+    updatedAt: '',
+  })
   const [message, setMessage] = useState<string>('')
 
   const [createJam, mutationResult] = useMutation<CreateJamData, JamInputType>(

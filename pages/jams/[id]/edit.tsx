@@ -19,6 +19,7 @@ const EditJamPage: NextPage<EditJamPageProps> = ({ id }) => (
 
 EditJamPage.getInitialProps = (ctx: NextPageContext) => {
   const { id } = ctx.query
+  // @ts-ignore
   return { id: typeof id === 'string' ? id : id[0] }
 }
 

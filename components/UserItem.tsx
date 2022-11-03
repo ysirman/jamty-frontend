@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { NextPage } from 'next'
+import Image from 'next/image'
 import { USER_QUERY, UserData } from '../graphql/queries/user.query'
 
 interface UserItemProps {
@@ -13,15 +14,19 @@ const UserItem: NextPage<UserItemProps> = ({ id }) => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {JSON.stringify(error)}</p>
-
+  if (!data) return null
   const { user } = data
-  if (!user) return null
 
   return (
     <>
       <ul>
         <li>
-          <img src={user.image ?? ''} width="50px" />
+          <Image
+            src={user.image ?? ''}
+            width="50px"
+            height="50px"
+            alt="プロフィール画像"
+          />
         </li>
         <li>{user.id}</li>
         <li>{user.name}</li>

@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { User } from '../types'
 
 interface CandidatesListProps {
-  candidates: [User]
+  candidates?: User[]
 }
 
 const CandidatesList: NextPage<CandidatesListProps> = ({ candidates }) => {

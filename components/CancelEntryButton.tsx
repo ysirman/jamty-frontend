@@ -10,7 +10,7 @@ import {
 
 interface CancelEntryButtonProps {
   jam: Jam
-  session: Session // WithSessionから受け取る
+  session?: Session // WithSessionから受け取る
 }
 
 const CancelEntryButton: NextPage<CancelEntryButtonProps> = ({
@@ -28,7 +28,7 @@ const CancelEntryButton: NextPage<CancelEntryButtonProps> = ({
       : setMessage('Successfully Cancel Entry')
   }
 
-  if (!jam.candidates?.some((c) => parseInt(c.id) === session.userId))
+  if (!jam.candidates?.some((c) => parseInt(c.id) === session?.userId))
     return null
 
   return (

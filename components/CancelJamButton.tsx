@@ -6,11 +6,9 @@ import {
   CancelJamData,
 } from '../graphql/mutations/cancel-jam.mutation'
 import { Jam } from 'types'
-import { Session } from 'next-auth'
 
 interface CancelJamButtonProps {
   jam: Jam
-  session: Session
 }
 
 const CancelJamButton: NextPage<CancelJamButtonProps> = ({ jam }) => {

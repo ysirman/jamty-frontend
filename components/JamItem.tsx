@@ -19,8 +19,8 @@ const JamItem: NextPage<JamItemProps> = ({ id }) => {
   })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {JSON.stringify(error)}</p>
+  if (!data) return null
   const { jam } = data
-  if (!jam) return null
 
   return (
     <>

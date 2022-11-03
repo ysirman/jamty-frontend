@@ -10,7 +10,7 @@ import {
 
 interface EntryButtonProps {
   jam: Jam
-  session: Session // WithSessionから受け取る
+  session?: Session // WithSessionから受け取る
 }
 
 const EntryButton: NextPage<EntryButtonProps> = ({ jam, session }) => {
@@ -24,7 +24,7 @@ const EntryButton: NextPage<EntryButtonProps> = ({ jam, session }) => {
       : setMessage('Successfully Entry Jam')
   }
 
-  if (jam.candidates?.some((c) => parseInt(c.id) === session.userId))
+  if (jam.candidates?.some((c) => parseInt(c.id) === session?.userId))
     return null
 
   return (

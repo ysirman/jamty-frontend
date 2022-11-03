@@ -11,7 +11,7 @@ export interface Jam {
   place: string
   prefectureId: string
   description: string
-  scheduleFor: string
+  scheduledFor: string
   canceledAt: string
   createdAt: string
   updatedAt: string
@@ -45,7 +45,9 @@ export interface User {
 }
 
 export interface UserInputType {
-  nickname: string
-  description: string
-  location: string
+  params: {
+    nickname: string
+    description: string
+    location: string
+  }
 }

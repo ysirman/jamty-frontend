@@ -15,7 +15,7 @@ interface EditUserItemProps {
 }
 
 const EditUserItem: NextPage<EditUserItemProps> = ({ session }) => {
-  const [user, setUser] = useState<User>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [message, setMessage] = useState<string>('')
   const [updateUser, mutationResult] = useMutation<
     UpdateUserData,
@@ -31,7 +31,7 @@ const EditUserItem: NextPage<EditUserItemProps> = ({ session }) => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {JSON.stringify(error)}</p>
-  if (!user) setUser(data.user)
+  if (!user && data) setUser(data.user)
   if (!user) return null
 
   const handleChange = (
