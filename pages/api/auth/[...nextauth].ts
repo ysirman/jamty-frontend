@@ -1,3 +1,4 @@
+// @ts-nocheck
 import NextAuth from 'next-auth'
 import TwitterProvider from 'next-auth/providers/twitter'
 import axios from 'axios'
@@ -14,7 +15,7 @@ export default NextAuth({
     maxAge: 15 * (24 * 60 * 60), // 15日（バックエンドのJWTと同じ期限にしておく）
   },
   callbacks: {
-    async signIn({ user, _account, profile }) {
+    async signIn({ user, profile }) {
       const twitterUser = {
         provider: 'twitter',
         uid: profile.data.id,
@@ -48,14 +49,14 @@ export default NextAuth({
       }
       return false
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user }) {
       if (user) {
         token.userId = user.id
         token.jwt = user.jwt
       }
       return token
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.userId = token.userId
       session.accessToken = token.jwt
       return session

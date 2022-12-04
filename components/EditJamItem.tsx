@@ -15,7 +15,7 @@ interface EditJamItemProps {
 }
 
 const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
-  const [jam, setJam] = useState<Jam>(null)
+  const [jam, setJam] = useState<Jam | null>(null)
   const [message, setMessage] = useState<string>('')
 
   const [updateJam, mutationResult] = useMutation<UpdateJamData, JamInputType>(
@@ -28,7 +28,7 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {JSON.stringify(error)}</p>
-  if (!jam) setJam(data.jam)
+  if (!jam && data) setJam(data.jam)
   if (!jam) return null
 
   const handleChange = (
@@ -60,7 +60,7 @@ const EditJamItem: NextPage<EditJamItemProps> = ({ id }) => {
   }
 
   return (
-    <WithSession userId={parseInt(jam.userId)} isOwner={true}>
+    <WithSession userId={jam.userId} isOwner={true}>
       <JamForm
         jam={jam}
         message={message}

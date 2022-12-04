@@ -1,18 +1,14 @@
 import { ReactElement, cloneElement, Children } from 'react'
-import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 
 type WithSessionProps = {
-  children: [ReactElement]
-  userId?: number
+  children: ReactElement | ReactElement[]
+  userId?: string
   isOwner?: boolean
 }
+type WithSessionType = (params: WithSessionProps) => any
 
-const WithSession: NextPage<WithSessionProps> = ({
-  children,
-  userId,
-  isOwner,
-}) => {
+const WithSession: WithSessionType = ({ children, userId, isOwner }) => {
   const { data: session, status } = useSession()
   const loading = status === 'loading'
   if (loading) return null

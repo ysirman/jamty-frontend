@@ -19,6 +19,7 @@ const UserPage: NextPage<UserPageProps> = ({ id }) => (
 
 UserPage.getInitialProps = (ctx: NextPageContext) => {
   const { id } = ctx.query
+  // @ts-ignore
   return { id: typeof id === 'string' ? id : id[0] }
 }
 

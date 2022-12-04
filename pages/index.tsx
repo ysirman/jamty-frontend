@@ -1,5 +1,6 @@
 import * as React from 'react'
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -49,9 +50,15 @@ const Home: NextPage = () => {
       )}
       {session && (
         <>
-          Signed in as <img src={session.user.image ?? ''} width="50px" />
-          {session.user.name} <br />
-          AccessToken : {session.accessToken} <br />
+          Signed in as{' '}
+          <Image
+            src={session?.user?.image ?? ''}
+            width="50px"
+            height="50px"
+            alt="プロフィール画像"
+          />
+          {session?.user?.name} <br />
+          AccessToken : {session?.accessToken} <br />
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )}

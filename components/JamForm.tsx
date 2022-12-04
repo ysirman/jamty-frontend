@@ -2,10 +2,12 @@ import { NextPage } from 'next'
 import { Jam } from '../types'
 
 interface JamFormProps {
-  jam: Jam
+  jam: Jam | null
   message: string
-  handleSave(): null
-  handleChange(): null
+  handleSave(): void
+  handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void
 }
 
 const JamForm: NextPage<JamFormProps> = ({
